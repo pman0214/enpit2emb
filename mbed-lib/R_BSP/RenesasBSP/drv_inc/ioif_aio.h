@@ -50,8 +50,6 @@ extern "C" {
  Typedefs
 *************************************************************************/
 
-typedef void *      pthread_attr_t;     /**< unsupported */
-
 union sigval
 {
     int             sival_int;          /**< Integer interpretation */
