@@ -61,10 +61,13 @@ char *DataElement::getString(const char *key) {
     strcat(_word , key );
     strcat(_word , "\"" );
  
-    // p = strstr( (char*)json_msg , _word ) + 2 + strlen(_word);
-    p = strstr( (char*)json_msg , _word ) + 1 + strlen(_word);
+    p = strstr( (char*)json_msg , _word );
+    if (!p)
+    {
+        return NULL;
+    }
+    p += 1 + strlen(_word);
 	
-    // while( (p[i] != ',')&&(p[i] != '\n')&&(p[i] != '\"') )
     while( (p[i] != ',')&&(p[i] != '\n')&&(p[i] != '\"')&&(p[i] != '}') )
     {
         _word[i] = p[i];
@@ -123,14 +126,16 @@ Milkcocoa* Milkcocoa::createWithApiKey(MClient *_client, const char *host, uint1
 	return new Milkcocoa(_client, host, port, _app_id, client_id, session);
 }
 
-void Milkcocoa::connect() {
+int Milkcocoa::connect() {
+    int ret;
 
-	if(client->isConnected())
-		return;
-		
-	if(client->connect(servername, portnum)!=0) {
+    if(client->isConnected())
+		return 0;
+
+    ret = client->connect(servername, portnum);
+	if(ret != 0) {
 		DBG(pc.printf("Network connect err\r\n");)
-		return;
+		return ret;
 	}
 
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
@@ -141,14 +146,17 @@ void Milkcocoa::connect() {
 	data.username.cstring = username;
 	data.password.cstring = password;
 
-	if (client->connect(data) != 0)  {
+    ret = client->connect(data);
+	if (ret != 0)  {
 		DBG(pc.printf("Milkcocoa connect err\r\n");)
-		return;
+		return ret;
 	}
+
+    return 0;
 }
 
 bool Milkcocoa::push(const char *path, DataElement dataelement) {
- 	char topic[100];
+	char topic[100];
 	char *buf;
 	MQTT::Message message;
 

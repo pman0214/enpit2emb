@@ -8,28 +8,19 @@
 
 class MQTTBP3595 : public MQTTSocket
 {
-public:    
-    MQTTBP3595(char* wlanssid, char* wlanpsk)
-    {
-        wlan.init();                          // Use DHCP
-        wlan.connect(wlanssid, wlanpsk);
-        ssid=wlanssid;
-        psk=wlanpsk;
-    }
-    
-//    EthernetInterface& getEth()
-//    {
-//        return (EthernetInterface&)wlan;
-//    }
-    
-    void reconnect()
-    {
-        wlan.connect(ssid, psk);  // nothing I've tried actually works to reconnect 
-    }
-    
+public:
+    MQTTBP3595(void);
+    MQTTBP3595(GR_PEACH_WlanBP3595 *wlan);
+    ~MQTTBP3595(void);
+
+    int Connect(char *ssid, char *psk);
+    int Connect(char *ssid, char *psk, nsapi_security_t security);
+
+    GR_PEACH_WlanBP3595 *GetWlan(void);
+
 private:
-    GR_PEACH_WlanBP3595 wlan;
-    char* ssid;
-    char* psk;
+    bool m_external_wlan;
+    GR_PEACH_WlanBP3595 *m_wlan;
+
 };
 #endif

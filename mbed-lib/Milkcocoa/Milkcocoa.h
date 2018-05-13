@@ -41,7 +41,7 @@ class Milkcocoa {
   Milkcocoa(MClient *_client, const char *host, uint16_t port, const char *_app_id, const char *client_id);
   Milkcocoa(MClient *_client, const char *host, uint16_t port, const char *_app_id, const char *client_id, char *_session);
   static Milkcocoa* createWithApiKey(MClient *_client, const char *host, uint16_t port, const char *_app_id, const char *client_id, char *key, char *secret);
-  void connect();
+  int connect();
   void loop();
   bool push(const char *path, DataElement dataelement);
   bool send(const char *path, DataElement dataelement);

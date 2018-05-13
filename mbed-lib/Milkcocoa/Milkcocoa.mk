@@ -11,6 +11,7 @@ C_OBJ += $(MBED_LIB_DIR)/Milkcocoa/MQTT/MQTTPacket/MQTTUnsubscribeClient.o
 C_OBJ += $(MBED_LIB_DIR)/Milkcocoa/MQTT/MQTTPacket/MQTTUnsubscribeServer.o
 
 CXX_OBJ += $(MBED_LIB_DIR)/Milkcocoa/Milkcocoa.o
+CXX_OBJ += $(MBED_LIB_DIR)/Milkcocoa/MQTT/MQTTBP3595.o
 
 INCLUDE_PATHS += -I$(MBED_LIB_DIR)/Milkcocoa/MQTT/MQTTPacket
 INCLUDE_PATHS += -I$(MBED_LIB_DIR)/Milkcocoa/MQTT/FP
