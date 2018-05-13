@@ -6,3 +6,7 @@
 *.syms
 *.map
 *.timestamp
+asp-*/cfg/cfg/cfg
+asp-*/cfg/toppers/*.a
+asp-*/cfg/toppers/itronx/*.a
+asp-*/cfg/toppers/oil/*.a
