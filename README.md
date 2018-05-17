@@ -43,6 +43,7 @@ $ make clean; make
 ## コンパイル方法
 
 TrueSTDUIOの人はビルドすればOK。
+ただし、git submoduleの ``example/README.md`` に書いてある通り、各種Makefileの ``USE_TRUESTUDIO`` を ``true`` に変更すること。
 
 Macの人は　``app.cpp`` など開発したアプリソースのあるディレクトリで以下を実行。
 
